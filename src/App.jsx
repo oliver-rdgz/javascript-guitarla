@@ -4,7 +4,12 @@ import Header from "./components/Header";
 
 import { db } from "./db/data";
 function App() {
-  const [data, setData] = useState(db);
+  const [data] = useState(db);
+  const [, setCarrito] = useState([]);
+  function addCarrito(item) {
+    setCarrito((prevCarrito) => [...prevCarrito, item]);
+  }
+  
   return (
     <>
       <Header />
@@ -13,8 +18,13 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {data.map(() => (
-            <Guitar />
+          {data.map((guitar) => (
+            <Guitar
+              key={guitar.id}
+              setCarrito={setCarrito}
+              guitar={guitar}
+              addCarrito={addCarrito}
+            />
           ))}
         </div>
       </main>
