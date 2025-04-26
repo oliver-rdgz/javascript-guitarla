@@ -1,10 +1,12 @@
-import { useMemo } from "react";
-
-export default function Header({ carrito, removeItemCarrito, increaseItem, decreaseItem, clearCarrito }) {
-  //state derivado
-  const carritoIsEmpty = useMemo(() => carrito.length === 0, [carrito]);
-  const totalCarrito = useMemo(() => carrito.reduce((total, item) => total + item.quantity * item.price, 0), [carrito]);
-
+export default function Header({
+  carrito,
+  removeItemCarrito,
+  increaseItem,
+  decreaseItem,
+  clearCarrito,
+  carritoIsEmpty,
+  totalCarrito
+}) {
   return (
     <>
       <header className="py-5 header">
@@ -36,7 +38,7 @@ export default function Header({ carrito, removeItemCarrito, increaseItem, decre
                         </thead>
                         <tbody>
                           {carrito.map((item) => (
-                            <tr>
+                            <tr key={item.id}>
                               <td>
                                 <img className="img-fluid" src={`/img/${item.image}.jpg`} alt="imagen guitarra" />
                               </td>
